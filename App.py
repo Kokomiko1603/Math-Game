@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from Menu import Menu
+from Level_1 import Level1
+from Level_2 import Level2
 
 class App(Tk):
     def __init__(self):
@@ -17,7 +19,7 @@ class App(Tk):
 
         self.frames = {}
 
-        for F in (Menu,):
+        for F in (Menu, Level1, Level2):
             frame = F( parent = self.container, controller = self )
             self.frames[F] = frame
             frame.grid( row = 0, column = 0, sticky = "nsew" )
