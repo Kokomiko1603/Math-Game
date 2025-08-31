@@ -14,3 +14,5 @@ class Level1(Frame):
         title_label.place(relx = 0.5, 
                    rely = 0.2,
                    anchor = 'center')
+        
+        
