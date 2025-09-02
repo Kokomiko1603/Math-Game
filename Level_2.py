@@ -37,6 +37,9 @@ class Level2(Frame):
 
         self.points.config(text = "Points: " + str(self.point_counter))
 
+    def reset_points(self):
+        self.point_counter = 0
+        self.points.config(text="Points: 0")
        
 
 
@@ -71,5 +74,8 @@ class Level2(Frame):
 
         ok_button = Button(self, text = "OK", command = self.check_answer)
         ok_button.place(relx = 0.5, rely = 0.7, anchor = 'center')
+
+        back_button = Button(self, text="Back to Menu", command=lambda: ( self.reset_points(), controller.show_frame("MainMenu")))
+        back_button.place(relx=0.1, rely=0.9, anchor="w")
         
         

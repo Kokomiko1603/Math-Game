@@ -36,7 +36,9 @@ class Level1(Frame):
 
         self.points.config(text = "Points: " + str(self.point_counter))
 
-       
+    def reset_points(self):
+        self.point_counter = 0
+        self.points.config(text="Points: 0")
 
 
     def __init__( self, parent, controller ):
@@ -51,24 +53,27 @@ class Level1(Frame):
         title_label.place(relx = 0.5, rely = 0.2, anchor = 'center')
 
         self.point_counter = 0
-        self.points = Label(self, text = "Points: " + str(self.point_counter), bg="#b3ebf2")
-        self.points.place(relx = 0.4, rely = 0.4, anchor = 'center')
+        self.points = Label(self, text="Points: " + str(self.point_counter), font=("Fixedsys", 20, "bold"), bg="#b3ebf2")
+        self.points.place(relx = 0.5, rely = 0.4, anchor = 'center')
 
-        self.number_1 = Label(self, text = "" , bg="#b3ebf2")
+        self.number_1 = Label(self, text = "" , font=("Fixedsys", 20, "bold"), bg="#b3ebf2")
         self.number_1.place(relx = 0.4, rely = 0.5, anchor = 'center')
 
-        self.operator = Label(self, text = "", bg="#b3ebf2")
+        self.operator = Label(self, text = "", font=("Fixedsys", 20, "bold"), bg="#b3ebf2")
         self.operator.place(relx = 0.5, rely = 0.5, anchor = 'center')
 
-        self.number_2 = Label(self, text = "", bg="#b3ebf2")
+        self.number_2 = Label(self, text = "", font=("Fixedsys", 20, "bold"), bg="#b3ebf2")
         self.number_2.place(relx = 0.6, rely = 0.5, anchor = 'center')
 
         self.generate_task()
 
-        self.input_box = Entry(self, bg="#b3ebf2")
+        self.input_box = Entry(self, font=("Fixedsys", 20, "bold"), bg="#b3ebf2")
         self.input_box.place(relx = 0.5, rely = 0.6, anchor = 'center')
 
-        ok_button = Button(self, text = "OK", command = self.check_answer)
+        ok_button = Button(self, text = "OK", font=("Fixedsys", 20, "bold"), command = self.check_answer)
         ok_button.place(relx = 0.5, rely = 0.7, anchor = 'center')
+
+        back_button = Button(self, text="Back to Menu", command=lambda: ( self.reset_points(), controller.show_frame("MainMenu")))
+        back_button.place(relx=0.1, rely=0.9, anchor="w")
         
         

@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from Menu import Menu
+from Menu import MainMenu
 from Level_1 import Level1
 from Level_2 import Level2
 
@@ -19,12 +19,12 @@ class App(Tk):
 
         self.frames = {}
 
-        for F in (Menu, Level1, Level2):
+        for F in (MainMenu, Level1, Level2):
             frame = F( parent = self.container, controller = self )
-            self.frames[F] = frame
+            self.frames[F.__name__] = frame
             frame.grid( row = 0, column = 0, sticky = "nsew" )
         
-        self.show_frame(Menu)
+        self.show_frame("MainMenu")
         
     def show_frame( self, page_class ):
         frame = self.frames[ page_class ]
