@@ -42,8 +42,13 @@ class Level1(Frame):
 
 
     def __init__( self, parent, controller ):
-        super().__init__(parent, background = "#b3ebf2")
+        super().__init__(parent)
         self.controller = controller
+
+        bg_image = Image.open("pixelarts/background.png").resize((600,700), Image.Resampling.NEAREST)
+        self.bg_photo = ImageTk.PhotoImage(bg_image)  # trzymaj referencję!
+        bg_label = Label(self, image=self.bg_photo, borderwidth=0, highlightthickness=0)
+        bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.title = Image.open("pixelarts/solve_message.png").resize((240, 60), Image.Resampling.NEAREST)
         self.title = self.title.convert("RGBA")
@@ -70,10 +75,28 @@ class Level1(Frame):
         self.input_box = Entry(self, font=("Fixedsys", 20, "bold"), bg="#b3ebf2")
         self.input_box.place(relx = 0.5, rely = 0.6, anchor = 'center')
 
-        ok_button = Button(self, text = "OK", font=("Fixedsys", 20, "bold"), command = self.check_answer)
-        ok_button.place(relx = 0.5, rely = 0.7, anchor = 'center')
+        ok_image = Image.open("pixelarts/ok_button.png").resize((75, 60), Image.Resampling.NEAREST).convert("RGBA")
+        self.ok_image = ImageTk.PhotoImage(ok_image)
 
-        back_button = Button(self, text="Back to Menu", command=lambda: ( self.reset_points(), controller.show_frame("MainMenu")))
+        ok_button = Button(
+            self,
+            text="OK",
+            image=self.ok_image,
+            bg="#b3ebf2",
+            highlightthickness=0,
+            borderwidth=0,
+            activebackground="#b3ebf2",
+            command=self.check_answer
+        )
+        ok_button.place(relx=0.5, rely=0.7, anchor='center')
+
+        back_image = Image.open("pixelarts/menu_button.png").resize((110, 60), Image.Resampling.NEAREST).convert("RGBA")
+        self.back_image = ImageTk.PhotoImage(back_image)
+
+        back_button = Button(self, text="Menu", image = self.back_image, bg="#b3ebf2",
+            highlightthickness=0,
+            borderwidth=0,
+            activebackground="#b3ebf2", command=lambda: ( self.reset_points(), controller.show_frame("MainMenu")))
         back_button.place(relx=0.1, rely=0.9, anchor="w")
         
         

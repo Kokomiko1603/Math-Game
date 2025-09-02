@@ -3,6 +3,7 @@ from tkinter import ttk
 from Menu import MainMenu
 from Level_1 import Level1
 from Level_2 import Level2
+from PIL import Image, ImageTk
 
 class App(Tk):
     def __init__(self):
