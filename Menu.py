@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from Level_1 import Level1
 from Level_2 import Level2
+import pygame
 
 class MainMenu(Frame):
     def __init__( self, parent, controller ):
@@ -26,12 +27,15 @@ class MainMenu(Frame):
                    anchor = 'center')
         #title_label.grid(row=1, column=10)
 
+        pygame.mixer.init()
+        click_sound = pygame.mixer.Sound("sounds/clicked_button.wav")
+
         self.level_1 = Image.open("pixelarts/level_1_button.png").resize((150, 50), Image.Resampling.NEAREST)
         self.level_1 = self.level_1.convert("RGBA")
         self.level_1 = ImageTk.PhotoImage(self.level_1)
-        level_1_label = Button(self, text = "Level 1", image = self.level_1, bg="#b3ebf2", highlightthickness=0, borderwidth=0, activebackground="#b3ebf2", command = lambda: self.controller.show_frame("Level1") ).place(relx = 0.5, rely = 0.45, anchor = "center")
+        level_1_label = Button(self, text = "Level 1", image = self.level_1, bg="#b3ebf2", highlightthickness=0, borderwidth=0, activebackground="#b3ebf2", command = lambda: (click_sound.play(), self.controller.show_frame("Level1")) ).place(relx = 0.5, rely = 0.45, anchor = "center")
 
         self.level_2 = Image.open("pixelarts/level_2_frame.png").resize((150, 50), Image.Resampling.NEAREST)
         self.level_2 = self.level_2.convert("RGBA")
         self.level_2 = ImageTk.PhotoImage(self.level_2)
-        level_2_label = Button(self, text = "Level 2", image = self.level_2, bg="#b3ebf2", highlightthickness=0, borderwidth=0, activebackground="#b3ebf2", command = lambda: self.controller.show_frame("Level2")).place(relx = 0.5, rely = 0.6, anchor = "center")
+        level_2_label = Button(self, text = "Level 2", image = self.level_2, bg="#b3ebf2", highlightthickness=0, borderwidth=0, activebackground="#b3ebf2", command = lambda: (click_sound.play(), self.controller.show_frame("Level2"))).place(relx = 0.5, rely = 0.6, anchor = "center")

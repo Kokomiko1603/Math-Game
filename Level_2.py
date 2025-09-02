@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import random
+import pygame
 
 class Level2(Frame):
     def generate_task(self):
@@ -15,6 +16,7 @@ class Level2(Frame):
             self.number_1.config(text = num1)
             self.number_2.config(text = random.randrange(0, 10))
         else:
+            num1 = random.randint(1, 10)
             solution = random.randrange(0, 10)
             self.number_1.config(text = num1*solution)
             self.number_2.config(text = num1)
@@ -29,10 +31,12 @@ class Level2(Frame):
 
         if user_answer == answer:
             self.point_counter += 1
+            pygame.mixer.Sound("sounds/clicked_button.wav").play()
             self.input_box.delete(0, END)
             self.generate_task()
         else:
             self.point_counter -= 1
+            pygame.mixer.Sound("sounds/rubber_duck.wav").play()
             self.input_box.delete(0, END)
 
         self.points.config(text = "Points: " + str(self.point_counter))
@@ -77,6 +81,8 @@ class Level2(Frame):
         self.input_box = Entry(self, font=("Fixedsys", 20, "bold"), bg="#b3ebf2")
         self.input_box.place(relx = 0.5, rely = 0.6, anchor = 'center')
 
+        click_sound = pygame.mixer.Sound("sounds/clicked_button.wav")
+
         ok_image = Image.open("pixelarts/ok_button.png").resize((75, 60), Image.Resampling.NEAREST).convert("RGBA")
         self.ok_image = ImageTk.PhotoImage(ok_image)
 
@@ -88,7 +94,7 @@ class Level2(Frame):
             highlightthickness=0,
             borderwidth=0,
             activebackground="#b3ebf2",
-            command=self.check_answer
+            command=(self.check_answer)
         )
         ok_button.place(relx=0.5, rely=0.7, anchor='center')
 
@@ -98,7 +104,7 @@ class Level2(Frame):
         back_button = Button(self, text="Menu", image = self.back_image, bg="#b3ebf2",
             highlightthickness=0,
             borderwidth=0,
-            activebackground="#b3ebf2", command=lambda: ( self.reset_points(), controller.show_frame("MainMenu")))
+            activebackground="#b3ebf2", command=lambda: ( click_sound.play(), self.reset_points(), controller.show_frame("MainMenu")))
         back_button.place(relx=0.1, rely=0.9, anchor="w")
         
         
